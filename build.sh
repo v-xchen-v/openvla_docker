@@ -1,0 +1,1 @@
+docker build -t openvla:latest -f Dockerfile .
