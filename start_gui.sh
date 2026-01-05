@@ -1,10 +1,12 @@
 #!/bin/bash
 
 """Usage: 
-  PRETRAINED_CHECKPOINT_ROOT=/home/xx/Documents/repos/hf_checkpoint \
-  OPENVLA_REPO=/home/xx/Documents/repos/openvla \
-  ./start_headless.sh
+xhost +
+PRETRAINED_CHECKPOINT_ROOT=/home/xx/Documents/repos/hf_checkpoint \
+OPENVLA_REPO=/home/xx/Documents/repos/openvla \
+./start_gui.sh
 """
+
 
 # current folder as WORD_DIR
 CURRENT_DIR=$(pwd)
@@ -31,6 +33,9 @@ docker run -itd --name openvla \
     --network=host \
     --privileged \
     --entrypoint /root/workspace/main/entrypoint.sh \
+    -e NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $PRETRAINED_CHECKPOINT_ROOT:/root/checkpoint:rw \
     -v $OPENVLA_REPO:/root/openvla:rw \
     -v $CURRENT_DIR:/root/workspace/main:rw \

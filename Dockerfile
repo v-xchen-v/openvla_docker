@@ -90,6 +90,8 @@ ENV PYTHONPATH="/tmp/LIBERO:/tmp/openvla:/tmp/bridge_data_robot/widowx_envs:/tmp
 
 # 10. Final fix (ensure compatible version)
 RUN /opt/conda/bin/pip install "numpy>=1.23.5,<2.0.0" && \
+    # Make sure ninja is installed before building flash-attn, otherwise, it may be super slow than 3 hr+
+    /opt/conda/bin/pip install ninja && \
     /opt/conda/bin/pip install flash-attn --no-build-isolation
 
 # Default command
