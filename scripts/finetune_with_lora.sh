@@ -1,5 +1,5 @@
 cd $OPENVLA_REPO
-LR=5e-5
+LR=1e-4
 BATCH_SIZE=4
 torchrun --standalone --nnodes 1 --nproc-per-node 4 vla-scripts/finetune.py \
   --vla_path "openvla/openvla-7b" \
